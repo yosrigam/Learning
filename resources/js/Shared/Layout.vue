@@ -1,12 +1,18 @@
 <template>
-
+  <Head>
+    <title>
+      Layout
+    </title>
+  </Head>
   <section class="p-6 bg-gray-200">
     <Header class="flex justify-between">
       <div class="flex items-center">
-      <h1 class="font-bold text-lg">
-        My App
-      </h1>
-      <p class="text-sm ml-4">Welcome Back, {{ username }} </p>
+        <h1 class="font-bold text-lg">
+          My App
+        </h1>
+        <p class="text-sm ml-4">Welcome Back, {{ username }} </p>
+        <input type="text">
+
       </div>
       <Nav/>
     </Header>
@@ -22,19 +28,21 @@
 
 <script>
 import Nav from "./Nav.vue";
+//import {Head} from "@inertiajs/inertia-vue3";
 
 export default {
   name: 'Layout.vue',
-  components: {Nav},
-  props: {
-  },
+  components: {Nav, /*Head*/},
+  props: {},
 
   data() {
     return {};
   },
 
   computed: {
-    username(){return this.$page.props.auth.user.username}
+    username() {
+      return this.$page.props.auth.user.username
+    }
   },
 
   methods: {},
