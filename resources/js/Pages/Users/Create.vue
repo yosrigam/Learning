@@ -42,9 +42,11 @@ import {Inertia} from "@inertiajs/inertia";
 
 export default {
   name: 'Users.Create',
+
   props: {
     user: Object,
   },
+
   setup() {
     const form = reactive({
       name: '',

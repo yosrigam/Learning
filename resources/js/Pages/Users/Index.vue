@@ -3,7 +3,7 @@
 
   <div class="my-2 border-gray-200 flex justify-between">
     <h1 class="text-4xl font-bold">Users</h1>
-    <Link :href="'users/create'" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"> create new user</Link>
+    <Link :href="'/users/create'" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"> create new user</Link>
     <input type="text" placeholder="Search..." class=" border border-2 rounded-xl px-6" v-model="search">
   </div>
 

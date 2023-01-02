@@ -33,11 +33,16 @@ Route::post('/users', function () {
 });
 
 Route::get('/users/{id}/edit', function () {
-
-	return Inertia::render('Users/Create', [
+	return Inertia::render('Users/Edit', [
 		'user' => User::find(\request()->route('id')),
 	]);
+});
+Route::put('/users', function () {
 
+	$user = User::find([\request()->input('id')])->first();
+	$user->name= \request()->input('name');
+	$user->email= \request()->input('email');
+	$user->save();
 });
 
 Route::get('/users', function () {
