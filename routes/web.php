@@ -34,7 +34,6 @@ Route::post('/users', function () {
 	]);
 	User::create($validated);
 	return redirect('/users');
-
 });
 
 Route::get('/users/{id}/edit', function () {
