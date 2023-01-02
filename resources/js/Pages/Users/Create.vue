@@ -9,6 +9,7 @@
       </label>
       <input class="border border-gray-400 px-4 py-2 w-full border rounded-xl" placeholder="User..."
              v-model="form.name">
+	    <div v-if="$page.props.errors.name" v-text="$page.props.errors.name" class="text-red-500 text-xs mt-1"></div>
     </div>
 
     <div class="mb-6">
@@ -17,6 +18,7 @@
       </label>
       <input class="border border-gray-400 px-4 py-2 w-full border rounded-xl" placeholder="E-mail..."
              v-model="form.email">
+	    <div v-if="$page.props.errors.email" v-text="$page.props.errors.email" class="text-red-500 text-xs mt-1"></div>
     </div>
 
     <div class="mb-6">
@@ -26,6 +28,7 @@
       <input type="password" class="border border-gray-400 px-4 py-2 w-full border rounded-xl"
              placeholder="Password..."
              v-model="form.password">
+	    <div v-if="$page.props.errors.password" v-text="$page.props.errors.password" class="text-red-500 text-xs mt-1"></div>
     </div>
 
     <div class="bm-6">

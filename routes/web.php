@@ -27,7 +27,12 @@ Route::get('/users/create', function () {
 });
 
 Route::post('/users', function () {
-	User::create(Request::all());
+	$validated = Request::validate([
+		'name' => 'required',
+		'email' => ['required','email'],
+		'password' => 'required',
+	]);
+	User::create($validated);
 	return redirect('/users');
 
 });
