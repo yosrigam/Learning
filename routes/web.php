@@ -30,8 +30,9 @@ Route::middleware('auth')->group(function () {
 	});
 
 	Route::get('/users/create', function () {
+
 		return Inertia::render('Users/Create');
-	});
+	})->middleware('can:create,App\Models\User');
 
 	Route::post('/users', function () {
 		$validated = Request::validate([
@@ -46,8 +47,10 @@ Route::middleware('auth')->group(function () {
 	Route::get('/users/{id}/edit', function () {
 		return Inertia::render('Users/Edit', [
 			'user' => User::find(\request()->route('id')),
+			'can' => ['editUser' => Auth::user()->can('edit', User::class)],
 		]);
 	});
+
 	Route::put('/users', function () {
 
 		$user = User::find([\request()->input('id')])->first();
@@ -66,7 +69,11 @@ Route::middleware('auth')->group(function () {
 					'id' => $user->id,
 					'name' => $user->name,
 				]),
-			'filters' => Request::only('search')],
+			'filters' => Request::only('search'),
+			'can' => [
+				'createUser' => Auth::user()->can('create', User::class),
+				'editUser' => Auth::user()->can('update', [Auth::user(), User::class])],
+		],
 		);
 		/*return Inertia::render('Users', [
 			'users' => User::paginate(10)->map(fn($user) => [

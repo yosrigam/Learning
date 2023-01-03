@@ -50,6 +50,7 @@ export default {
 
 	props: {
 		user: Object,
+
 	},
 
 	setup() {

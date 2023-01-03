@@ -3,7 +3,7 @@
 
 	<div class="my-2 border-gray-200 flex justify-between">
 		<h1 class="text-4xl font-bold">Users</h1>
-		<Link :href="'/users/create'" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500"> create new user
+		<Link :href="'/users/create'" class="bg-blue-400 text-white rounded py-2 px-4 hover:bg-blue-500" v-if="can.createUser"> create new user
 		</Link>
 		<input type="text" placeholder="Search..." class=" border border-2 rounded-xl px-6" v-model="search">
 	</div>
@@ -25,7 +25,7 @@
 							</div>
 						</td>
 						<td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-							<Link :href="'/users/' + user.id + '/edit'" class="text-indigo-600 hover:text-indigo-900">edit</Link>
+							<Link :href="'/users/' + user.id + '/edit'" class="text-indigo-600 hover:text-indigo-900" v-if="can.editUser">edit</Link>
 						</td>
 					</tr>
 					</tbody>
@@ -56,7 +56,8 @@ export default {
 
 	props: {
 		users: Object,
-		filters: Object
+		filters: Object,
+		can: Object,
 	},
 
 	data() {
@@ -65,14 +66,14 @@ export default {
 		};
 	},
 
-  watch: {
-    search: debounce(function (value) {
-      Inertia.get('/users', {search: value}, {
-        preserveState: true,
-        replace: true
-      });
-    },500),
-  },
+	watch: {
+		search: debounce(function (value) {
+			Inertia.get('/users', {search: value}, {
+				preserveState: true,
+				replace: true
+			});
+		}, 500),
+	},
 
 	computed: {},
 
