@@ -8,7 +8,9 @@ createInertiaApp({
 	resolve: (name) => {
 		const page = resolvePageComponent(`./Pages/${name}.vue`, import.meta.glob('./Pages/**/*.vue'));
 		page.then((module) => {
+			if (module.default.layout === undefined){
 			module.default.layout = Layout;
+			}
 		});
 		return page;
 	},
