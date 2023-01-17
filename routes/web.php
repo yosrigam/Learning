@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -44,9 +45,9 @@ Route::middleware('auth')->group(function () {
 		return redirect('/users');
 	});
 
-	Route::get('/users/{id}/edit', function () {
+	Route::get('/users/{id}/edit', function ($id) {
 		return Inertia::render('Users/Edit', [
-			'user' => User::find(\request()->route('id')),
+			'user' => User::find($id)->only(['name','email','id']),
 			'can' => ['editUser' => Auth::user()->can('edit', User::class)],
 		]);
 	});
@@ -58,8 +59,8 @@ Route::middleware('auth')->group(function () {
 		$user->email = \request()->input('email');
 		$user->save();
 	});
-
-	Route::get('/users', function () {
+	Route::get('/users', [UserController::class,'index']);
+	/*Route::get('/users', function () {
 		return Inertia::render('Users/Index', [
 			'users' => User::when(Request::input('search'), function ($query, $search) {
 				$query->where('name', 'like', "%{$search}%");
@@ -75,12 +76,13 @@ Route::middleware('auth')->group(function () {
 				'editUser' => Auth::user()->can('update', [Auth::user(), User::class])],
 		],
 		);
-		/*return Inertia::render('Users', [
+		return Inertia::render('Users', [
 			'users' => User::paginate(10)->map(fn($user) => [
 				'name' => $user->name,
 			]),
-		]);*/
+		]);
 	});
+	*/
 
 	Route::get('/settings', function () {
 
